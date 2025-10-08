@@ -23,6 +23,8 @@ let TD_FONT_SIZE = localStorage.getItem("TD_FONT_SIZE") || "20px";
 let storedCurrencies = localStorage.getItem("currencies");
 let branchData = [];
 
+const serverUrl = window.location.origin; // e.g. http://localhost:3000 or https://domain.com
+
 if (storedCurrencies) {
   try {
     const parsed = JSON.parse(storedCurrencies);
@@ -33,7 +35,7 @@ if (storedCurrencies) {
         return {
           CountryName: cur["Currency Name"],
           CURRENCY_NAME_ARABIC: cur["Currency Name Arabic"] || "",
-          FlagUrl: `http://localhost:3000/FLAGS/${flagFile}`,
+          FlagUrl: `${serverUrl}/FLAGS/${flagFile}`,
           BuyRate: cur["Buy Rate"] || "",
           SellRate: cur["Sell Rate"] || "",
           TTRemittanceRate: cur["TTRemittance Rate"] || "",
@@ -51,12 +53,13 @@ if (storedCurrencies) {
   branchData = [getDefaultCurrency()];
 }
 
-// Default currency generator
+// Default currency generator (auto host & port)
 function getDefaultCurrency() {
+  const serverUrl = window.location.origin; // dynamically detects backend URL
   return {
     CountryName: "HONG KONG DOLLAR",
     CURRENCY_NAME_ARABIC: "",
-    FlagUrl: "http://localhost:3000/FLAGS/HK.png",
+    FlagUrl: `${serverUrl}/FLAGS/HK.png`,
     BuyRate: "24.09",
     SellRate: "0.56",
     TTRemittanceRate: "1.00",
