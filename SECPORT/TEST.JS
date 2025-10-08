@@ -31,7 +31,7 @@ if (storedCurrencies) {
     if (Array.isArray(parsed) && parsed.length > 0) {
       branchData = parsed.map((cur, index) => {
         const code = cur["Currency Code"] || "";
-        const flagFile = code.slice(0, 2).toLowerCase() + ".png";
+        const flagFile = code.slice(0, 2).toUpperCase() + ".png";
         return {
           CountryName: cur["Currency Name"],
           CURRENCY_NAME_ARABIC: cur["Currency Name Arabic"] || "",
